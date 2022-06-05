@@ -81,8 +81,6 @@ Inbound rules added to the Azure Network Security Group as per table below, no c
 | ELK-Server-NSG    | 3500      | ELK-Allow      | 5601   | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
 | RedTeam-NSG       | 2500      | HTTP-Allow     | 80     | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
 |                   | 3001      | SSH-Allow      | 22     | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
-|                   | 2500      | SSH-Allow      | 22     | TCP         | 10.0.0.4           | VirtualNetwork  | Allow     |
-
 
 ------------------------------------------------------------------------------------------------------------------------------------------- 
   
