@@ -7,6 +7,9 @@ The files in this repository were used to configure the network depicted below
 
 ![Network Diagram](/Diagrams/Network-Diagram.png)
 
+
+[Network Diagram](/Diagrams/Network-Diagram.png)
+
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML or config file may be used to install only certain pieces of it, such as Filebeat
 
 
@@ -18,9 +21,9 @@ This document contains the following details:
   - Machines Being Monitored
 - How to Use the Ansible Build
 
-=============================================================================================================================================
+------------------------------------------------------------------------------------------------------------------------------------------- 
 
-## Topology  
+## Description of the Topology  
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 Load balancing ensures that the application will ensure a high availablilty, in addition to vetting traffic to the network.
@@ -34,10 +37,10 @@ Load balancing ensures that the application will ensure a high availablilty, in 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the **_network_** and system **_system logs_**.
 
 - What does Filebeat watch for?
-  - **_Filebeat, as the name implies, ships log files. In an ELK-based logging pipeline, Filebeat plays the role of the logging agent—installed on the machine generating the log files, tailing them, and forwarding the data to either Logstash for more advanced processing or directly into Elasticsearch for indexing_**
+  - **_Filebeat is a lightweight shipper for forwarding and centralizing log data. Installed as an agent on your servers, Filebeat monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or Logstash for indexing_**
  
 - What does Metricbeat record?
-  - **_Metricbeat uses modules to collect metrics. Each module defines the basic logic for collecting data from a specific service, such as Redis or MySQL. A module consists of metricsets that fetch and structure the data._**
+  - **Metricbeat is a lightweight shipper that you can install on your servers to periodically collect metrics from the operating system and from services running on the server. Metricbeat takes the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch or Logstash._**
 
 The configuration details of each machine may be found below.
 
@@ -48,9 +51,9 @@ The configuration details of each machine may be found below.
 | Web-2             | UbuntuServer    | 10.0.0.6 /               | Linux/Ubuntu       |
 | ELKserver         | UbuntuServer    | 10.2.0.4 / 52.255.61.111 | Linux/Ubuntu       |
 
-Subnet - 10.1.X.X is for workstations and is not utilised at this time - it will be utilised to add live data to the system at a later date.
+Subnet - 10.1.X.X is for workstations and is not utilised at this time.
 
-=============================================================================================================================================
+------------------------------------------------------------------------------------------------------------------------------------------- 
 
 ## Access Policies  
 
@@ -69,14 +72,18 @@ A summary of the access policies in place can be found in the table below.
 
 ## Azure NSG
 
-Two Network Security Groups are employed to ensure that all traffic is vetted for security
+Two Network Security Groups are employed to ensure that all traffic is vetted for security.  Inbound rules only were modified from the defaults.
  
-   
-   
- 
-  =============================================================================================================================================
+   | Name              | Priority  Name             Port   Protocol    Source             Destination          Action    |
+   | ELK-Server-NSG    | 3500      ELK-Allow        5601   TCP         Workstation IP     Virtual Network      Allow     |
+   | RedTeam-NSG       | 2500      HTTP-Allow       80     TCP         Workstation IP     VirtualNetwork       Allow     |
+   |                   | 3001      SSH-Allow        22     TCP         Workstation IP     VirtualNetwork       Allow     |
+   |                   | 2500      SSH-Allow        22     TCP         10.0.0.4           VirtualNetwork       Allow     |
 
-## Elk Configuration  
+
+   ------------------------------------------------------------------------------------------------------------------------------------------- 
+  
+  ## Elk Configuration  
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous.
 
@@ -163,11 +170,11 @@ Web-1
 
 Web-2
 -----
-![Web-1 DVWA](/Images/docker-web-1.png)
+![Web-2 DVWA](/Images/docker-web-2.png)
 
 
+------------------------------------------------------------------------------------------------------------------------------------------- 
 
-=============================================================================================================================================
 
 ## Target Machines & Beats  
 This ELK server is configured to monitor the following machines:
@@ -188,9 +195,9 @@ Metricbeat
 These Beats allow us to collect the following information from each machine:
 
   - Filebeat will be used to collect log files from the above meantioned machines.
-    - This includes all logs on the system which are specified such as access logs, event logs, docker logs and so forth.
+    - This includes all logs on the system which are specified such as access logs, event logs, docker logs, among others.
 
-  - Metericbeat will be used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
+  - Metericbeat will be used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats, among others.
 
 ------------------------------------------------------------------------------------------------------------------------------------------- 
 
@@ -263,43 +270,39 @@ SSH into the control node and follow the steps below:
 |            COMMAND                               | PURPOSE                                               |
 |--------------------------------------------------|-------------------------------------------------------|                         
 |`ssh-keygen`                                      | create a ssh key for setup VM's                       |
-|`sudo cat .ssh/id_rsa.pub`                        |  to view the ssh public key                           |
-|`ssh azadmin@Jump-Box-Provisioner IP address`     |  to log into the Jump-Box-Provisioner                 |
-| `sudo docker container list -a`                  | list all docker containers                            |
-| `sudo docker start dremy_elbakyan`               | start docker container dremy_elbakyan                 |
-|`sudo docker ps -a`                               |  list all active/inactive containers                  |
-|`sudo docker attach dremy_elbakyan`               |  effectively sshing into the dremy_elbakyan container |
+|`sudo cat .ssh/id_rsa.pub`                        | to view the ssh public key                            |
+|`ssh [username]@Jump-Box-Provisioner IP address`  | to log into the Jump-Box-Provisioner                  |
+|`sudo docker container list -a`                   | list all docker containers                            |
+|`sudo docker start [Ansible Container Name]`      | start docker container dremy_elbakyan                 |
+|`sudo docker ps -a`                               | list all active/inactive containers                   |
+|`sudo docker attach [Ansible Container Name]`     | effectively sshing into the dremy_elbakyan container  |
 |`cd /etc/ansible`                                 | Change directory to the Ansible directory             |
 |`ls -laA`                                         | List all file in directory (including hidden)         |
-|`nano /etc/ansible/hosts`                         |  to edit the hosts file                               |
-|`nano /etc/ansible/ansible.cfg`                   |  to edit the ansible.cfg file                         |
-|`nano /etc/ansible/pentest.yml`                   |  to edit the My-Playbook                              |
-|`ansible-playbook [location][filename]`           |  to run the playbook                                  |
-|`sudo lsof /var/lib/dpkg/lock-frontend`           | unlocking a locked file                               |
-|`ssh ansible@Web-1 IP address`                    |  to log into the Web-1 VM                             |
-|`ssh ansible@Web-2 IP address`                    |  to log into the Web-2 VM                             |
-|`ssh ansible@DVWA-VM3 IP address`                 |  to log into the DVWA-VM3 VM                          |
-|`ssh ansible@ELKserver IP address`                |  to log into the ELKserver VM                         |
+|`nano /etc/ansible/hosts`                         | to edit the hosts file                                |
+|`nano /etc/ansible/ansible.cfg`                   | to edit the ansible.cfg file                          |
+|`ssh [username]@[Web-1 IP Address]`               | to log into the Web-1 VM                              |
+|`ssh [username]@[Web-2 IP Address]`               | to log into the Web-2 VM                              |
+|`ssh [username]@ELKserver IP address`             | to log into the ELKserver VM                          |
 |`exit`                                            | to exit out of docker containers/Jump-Box-Provisioners|
-|`nano /etc/ansible/ansible.cfg`                   |  to edit the ansible.cfg file                         |
-|`nano /etc/ansible/hosts`                         |  to edit the hosts file                               |
-|`nano /etc/ansible/pentest.yml`                   |  to edit the My-Playbook                              |
-|`ansible-playbook [location][filename]`           |  to run the playbook                                  |
-|`sudo apt-get update` 				                     |  this will update all packages                        |
-|`sudo apt install docker.io`				               |  install docker application		                       |
-|`sudo service docker start`				               |  start the docker application                         |
-|`sudo systemctl status docker`				             |  status of the docker application                     |
-|`sudo systemctl start docker`                     |  start the docker service                             |
-|`sudo docker pull cyberxsecurity/ansible`	       |  pull the docker container file                       |
-|`sudo docker run -ti cyberxsecurity/ansible bash` |  run and create a docker container image              |
-|`ansible -m ping all`                             |  check the connection of ansible containers           |
-|`curl -L -O [location of the file on the web]`    |  to download a file from the web                      |
-|`dpkg -i [filename]`                              |  to install the file i.e. (filebeat & metricbeat)     |
-|`http://20.84.136.248:5601//app/kibana`           | Open web browser and navigate to Kibana Logs          |
+|`nano /etc/ansible/ansible.cfg`                   | to edit the ansible.cfg file                          |
+|`nano /etc/ansible/hosts`                         | to edit the hosts file                                |
+|`ansible-playbook [location][filename]`           | to run the playbook                                   |
+|`sudo apt update` 				                         | this will update all packages                         |
+|`sudo apt full-upgrade`                           | fully upgrade the host system                         |
+|`sudo apt install docker.io`				               | install docker application		                         |
+|`sudo systemctl start docker`				             | start the docker application                          |
+|`sudo systemctl status docker`				             | status of the docker application                      |
+|`sudo systemctl enable docker`                    | start the docker service by default on boot           |
+|`sudo docker pull cyberxsecurity/ansible`	       | pull the docker container file                        |
+|`ansible -m ping all`                             | check the connection of ansible containers            |
+|`curl -L -O [location of the file on the web]`    | to download a file from the web                       |
+|`dpkg -i [filename]`                              | to install the file i.e. (filebeat & metricbeat)      |
+|`http://[Your Public ELK IP]:5601//app/kibana`    | Open web browser and navigate to Kibana Logs          |
+|`http://[Your Public DVWA IP Address]/`           | Open web browser and navigate to DVWA                 |
 |`nano filebeat-config.yml`                        | create and edit filebeat config file                  |
-|`nano filebeat-playbook.yml`                      | write YAML file to install filebeat on webservers     |
-|`nano metricbeat-config.yml`                      | create metricbeat config file and edit it             |
-|`nano metricbeat-playbook.yml`                    | write YAML file to install metricbeat on webservers   |  
+|`nano filebeat-playbook.yml`                      | create and edit filebeat installation playbook        |
+|`nano metricbeat-config.yml`                      | create and edit metricbeat config file                |
+|`nano metricbeat-playbook.yml`                    | create and edit filebeat installation playbook        |  
 ------------------------------------------------------------------------------------------------------------
 
 @Leon Scott - University of Western Austrlia - Cybersecurity Bootcamp
