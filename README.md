@@ -1,7 +1,7 @@
 #### Leon Scott -- Week 13 - ELK STACK Project A
 #### _June 04, 2022 -- UniWA Cybersecurity - Boot Camp_  
 
-ELK Stack Deployment
+# ELK Stack Deployment
 -------------------------------------------------------------------------------------------------------------------------------------------
 The files in this repository were used to configure the network depicted below
 
@@ -10,7 +10,7 @@ The files in this repository were used to configure the network depicted below
 
 [Network Diagram](/Diagrams/Network-Diagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML or config file may be used to install only certain pieces of it, such as Filebeat
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used recreate the entire deployment pictured above. Alternatively, select portions of the YAML or config file may be used to install only certain pieces of it, such as Filebeat.
 
 
 This document contains the following details:
@@ -158,19 +158,19 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.  
 
-ELKserver
+### ELKserver
 ---------
 ![ELK Server](/Images/docker-elk-server.png)
 
-Jump-Box-Provisioner
+### Jump-Box-Provisioner
 --------------------
 ![Jump Box Ansible Container](/Images/docker-jump-box-provisioner.png)
 
-Web-1
+### Web-1
 -----
 ![Web-1 DVWA](/Images/docker-web-1.png)
 
-Web-2
+### Web-2
 -----
 ![Web-2 DVWA](/Images/docker-web-2.png)
 
@@ -178,7 +178,7 @@ Web-2
 ------------------------------------------------------------------------------------------------------------------------------------------- 
 
 
-## Target Machines & Beats  
+### Target Machines & Beats  
 This ELK server is configured to monitor the following machines:
 
 - The following IP machince sare being monitored.  All machines are DVWA machines
@@ -225,7 +225,7 @@ SSH into the control node and follow the steps below:
 ![Ansible Playbook Run](/Images/ansible-run-playbook.png)
 ![Ansible ELK Configuration successful](/Images/ansible-run-playbook-successful.png)
 
-## Installing and Configuring Filebeat
+### Installing and Configuring Filebeat
 
  - Whilst still connected to the anisble container
  - Download the following file 'filebeat-config.yml and install it to /etc/ansible/files directory
@@ -242,7 +242,7 @@ SSH into the control node and follow the steps below:
      - go to 'Module status' and check data - you should get successfully receiving data
 
 
-## Installing and Configuring Metricbeat
+### Installing and Configuring Metricbeat
 
  - Whilst still connected to the anisble container
  - Download the following file 'metricbeat-config.yml and install it to /etc/ansible/roles directory
@@ -263,9 +263,9 @@ SSH into the control node and follow the steps below:
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## System Commands
+### System Commands
 
- - The following system commands will be required
+ - The following system commands were used within the project
 
 
 
