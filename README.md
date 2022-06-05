@@ -76,6 +76,7 @@ Two Network Security Groups are employed to ensure that all traffic is vetted fo
 Inbound rules added to the Azure Network Security Group as per table below, no changes were made to outbound rules.
  
 | Name              | Priority  | Name           | Port   | Protocol    | Source             | Destination     | Action    |
+|-------------------|-----------|----------------|--------|-------------|--------------------|-----------------|-----------|
 | ELK-Server-NSG    | 3500      | ELK-Allow      | 5601   | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
 | RedTeam-NSG       | 2500      | HTTP-Allow     | 80     | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
 |                   | 3001      | SSH-Allow      | 22     | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
