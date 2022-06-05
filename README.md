@@ -1,7 +1,8 @@
-#### Leon Scott -- Week 13 - ELK STACK Project A
-#### _June 04, 2022 -- UniWA Cybersecurity - Boot Camp_  
 
 # ELK Stack Deployment
+
+#### Leon Scott -- Week 13 - ELK STACK Project A
+#### _June 04, 2022 -- UniWA Cybersecurity - Boot Camp_  
 -------------------------------------------------------------------------------------------------------------------------------------------
 The files in this repository were used to configure the network depicted below
 
