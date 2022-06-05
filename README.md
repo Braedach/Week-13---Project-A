@@ -306,5 +306,19 @@ SSH into the control node and follow the steps below:
 |`nano metricbeat-playbook.yml`                    | create and edit filebeat installation playbook        |  
 ------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+## References
+
+- [Diagram IO Site](https://app.diagrams.net/?libs=general;veeam)
+- [What is Filebeat ELK](https://christchurchgreenwich.com/qna/what-is-the-use-of-filebeat-in-elk/#)
+- [What is Metricbeat ELK](https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-overview.html#)
+- [Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- [Linuxize Website](https://linuxize.com/)
+- [Tower - Git FAQ](https://www.git-tower.com/learn/git/faq/push-to-github/#)
+
+
+
+
 @Leon Scott - University of Western Austrlia - Cybersecurity Bootcamp
 
