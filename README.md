@@ -75,11 +75,11 @@ A summary of the access policies in place can be found in the table below.
 Two Network Security Groups are employed to ensure that all traffic is vetted for security.
 Inbound rules added to the Azure Network Security Group as per table below, no changes were made to outbound rules.
  
-| Name              | Priority  |Name             |Port   |Protocol    |Source             |Destination          |Action    |
-| ELK-Server-NSG    | 3500      |ELK-Allow        |5601   |TCP         |Workstation IP     |VirtualNetwork       |Allow     |
-| RedTeam-NSG       | 2500      |HTTP-Allow       |80     |TCP         |Workstation IP     |VirtualNetwork       |Allow     |
-|                   | 3001      |SSH-Allow        |22     |TCP         |Workstation IP     |VirtualNetwork       |Allow     |
-|                   | 2500      |SSH-Allow        |22     |TCP         |10.0.0.4           |VirtualNetwork       |Allow     |
+| Name              | Priority  | Name           | Port   | Protocol    | Source             | Destination     | Action    |
+| ELK-Server-NSG    | 3500      | ELK-Allow      | 5601   | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
+| RedTeam-NSG       | 2500      | HTTP-Allow     | 80     | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
+|                   | 3001      | SSH-Allow      | 22     | TCP         | Workstation IP     | VirtualNetwork  | Allow     |
+|                   | 2500      | SSH-Allow      | 22     | TCP         | 10.0.0.4           | VirtualNetwork  | Allow     |
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------- 
@@ -284,7 +284,7 @@ SSH into the control node and follow the steps below:
 |`ssh [username]@[Web-1 IP Address]`               | to log into the Web-1 VM                              |
 |`ssh [username]@[Web-2 IP Address]`               | to log into the Web-2 VM                              |
 |`ssh [username]@ELKserver IP address`             | to log into the ELKserver VM                          |
-|`exit`                                            | to exit out of docker containers/Jump-Box-Provisioners|
+|`exit`                                            | to exit out of shells                                 |
 |`nano /etc/ansible/ansible.cfg`                   | to edit the ansible.cfg file                          |
 |`nano /etc/ansible/hosts`                         | to edit the hosts file                                |
 |`ansible-playbook [location][filename]`           | to run the playbook                                   |
