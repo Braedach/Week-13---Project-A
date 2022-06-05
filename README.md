@@ -1,24 +1,24 @@
-### Leon Scott -- Week 13 - ELK STACK Project A
+#### Leon Scott -- Week 13 - ELK STACK Project A
 #### _June 04, 2022 -- UniWA Cybersecurity - Boot Camp_  
 
 ELK Stack Deployment
-==============================
+-------------------------------------------------------------------------------------------------------------------------------------------
 The files in this repository were used to configure the network depicted below
 
-[Network Diagram](/Diagrams/Network-Diagram.png)
+![Network Diagram](/Diagrams/Network-Diagram.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML or config file may be used to install only certain pieces of it, such as Filebeat
 
 
 This document contains the following details:
-- Description of the Topologu
+- Description of the Topology
 - Access Policies
 - ELK Configuration
   - Beats in Use
   - Machines Being Monitored
 - How to Use the Ansible Build
 
--------------------------------------------------------------------------------------------------------------------------------------------
+=============================================================================================================================================
 
 ## Topology  
 
@@ -26,7 +26,7 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 Load balancing ensures that the application will ensure a high availablilty, in addition to vetting traffic to the network.
 
 - What aspect of security do load balancers protect?
-  - **_Load balancers add resiliency by rerouting live traffic from one server to another if a server becomes unavailable.
+  - **_Load balancers add resiliency by rerouting live traffic from one server to another if a server becomes unavailable._**
 
 - What is the advantage of a jump box?
   - **_A Jump Box Provisioner is important as it prevents Azure VMs from being exposed via a public IP Address. This allows us to do monitoring and logging on a single box. We can also restrict the IP addresses able to access the Jump Box_**
@@ -43,13 +43,14 @@ The configuration details of each machine may be found below.
 
 | Name              | Function        | IP Address               | Operating System   |
 |-------------------|-----------------|--------------------------|--------------------|
-| Jump Box          | Gateway         | 10.0.0.4 / 20.213.237.211| Linux              |
-| Web-1             | UbuntuServer    | 10.0.0.5 / 	           | Linux              |
-| Web-2             | UbuntuServer    | 10.1.0.6 /               | Linux              |
-| ELKserver         | UbuntuServer    | 10.2.0.4 / 52.255.61.111 | Linux              |
+| Jump Box          | Gateway         | 10.0.0.4 / 20.213.237.211| Linux/Ubuntu       |
+| Web-1             | UbuntuServer    | 10.0.0.5 / 	             | Linux/Ubuntu       |
+| Web-2             | UbuntuServer    | 10.0.0.6 /               | Linux/Ubuntu       |
+| ELKserver         | UbuntuServer    | 10.2.0.4 / 52.255.61.111 | Linux/Ubuntu       |
 
+Subnet - 10.1.X.X is for workstations and is not utilised at this time - it will be utilised to add live data to the system at a later date.
 
--------------------------------------------------------------------------------------------------------------------------------------------
+=============================================================================================================================================
 
 ## Access Policies  
 
@@ -66,22 +67,29 @@ A summary of the access policies in place can be found in the table below.
 | Web-2             | No                  |                      |
 | ELKserver         | Yes - Restricted IP | IAW NSG              |
 
+## Azure NSG
 
-
--------------------------------------------------------------------------------------------------------------------------------------------
+Two Network Security Groups are employed to ensure that all traffic is vetted for security
+ 
+   
+   
+ 
+  =============================================================================================================================================
 
 ## Elk Configuration  
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
+
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous.
 
 - What is the main advantage of automating configuration with Ansible?
-  - There are multiple advantages, Ansible lets you quickly and easily deploy multiple applications throught the YAML playbook
-  - No requirement to repeat coding across systems
+  - Ansible lets you quickly and easily deploy multiple applications throught a YAML playbook that can be deployed on a 'purpose' for a particular host.
+  - No requirement to repeat coding actions across systems.  They can be configured via a single YAML file.
   - Scaleable - from 2-3 VMs to many more with limited additional work
   - Ansible reports the configuration state of your machines to allow for easy fault finding
 
 The playbook implements the following tasks:
 
-- In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc.
+- The following ELK Configuration file does the following:
+
   - Specify a different group of machines:
       ```yaml
         - name: Config elk VM with Docker
@@ -143,28 +151,28 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ELKserver
 ---------
-[ELK Server](/Images/docker-elk-server.png)
+![ELK Server](/Images/docker-elk-server.png)
 
 Jump-Box-Provisioner
 --------------------
-[Jump Box Ansible Container](/Images/docker-jump-box-provisioner.png)
+![Jump Box Ansible Container](/Images/docker-jump-box-provisioner.png)
 
 Web-1
 -----
-[Web-1 DVWA](/Images/docker-web-1.png)
+![Web-1 DVWA](/Images/docker-web-1.png)
 
 Web-2
 -----
-[Web-1 DVWA](/Images/docker-web-1.png)
+![Web-1 DVWA](/Images/docker-web-1.png)
 
 
 
--------------------------------------------------------------------------------------------------------------------------------------------
+=============================================================================================================================================
 
 ## Target Machines & Beats  
 This ELK server is configured to monitor the following machines:
 
-- List the IP addresses of the machines you are monitoring
+- The following IP machince sare being monitored.  All machines are DVWA machines
   - Web-1: 10.0.0.5
   - Web-2: 10.0.0.6
 
@@ -172,10 +180,10 @@ This ELK server is configured to monitor the following machines:
 We have installed the following Beats on these machines:
 
 Filebeat
-[Filebeat Successful](/Images/filebeat-installation-successful.png)
+![Filebeat Successful](/Images/filebeat-installation-successful.png)
 
 Metricbeat
-[Metricbeat Successful](/Images/metricbeat-installation-successful.png)
+![Metricbeat Successful](/Images/metricbeat-installation-successful.png)
 
 These Beats allow us to collect the following information from each machine:
 
@@ -195,7 +203,7 @@ In order to use the playbook, you will need to have an Ansible control node alre
 SSH into the control node and follow the steps below:
 
 - Copy the install-elk YAML file to the /etc/ansible directory
-- [ELK Installation and VM Configuration ](https://github.com/Braedach/Week-13---Project-A/blob/main/Ansible/install-elk.yml)
+- ![ELK Installation and VM Configuration ](https://github.com/Braedach/Week-13---Project-A/blob/main/Ansible/install-elk.yml)
 - Update the host file in the /etc/ansible directory to include the new elk server
 - Run the playbook
     - type the following command: 'ansible-playbook /etc/ansible/install-elk.yml'
@@ -204,9 +212,9 @@ SSH into the control node and follow the steps below:
     - we are now ready to install the filebeat and metricbeat agents
 
 
-[Ansible Hosts File Elk](/Images/filebeat-installation-successful.png)
-[Ansible Playbook Run](/Images/ansible-run-playbook.png)
-[Ansible ELK Configuration successful](/Images/ansible-run-playbook-successful.png)
+![Ansible Hosts File Elk](/Images/filebeat-installation-successful.png)
+![Ansible Playbook Run](/Images/ansible-run-playbook.png)
+![Ansible ELK Configuration successful](/Images/ansible-run-playbook-successful.png)
 
 ## Installing and Configuring Filebeat
 
@@ -254,7 +262,7 @@ SSH into the control node and follow the steps below:
 
 |            COMMAND                               | PURPOSE                                               |
 |--------------------------------------------------|-------------------------------------------------------|                         
-|`ssh-keygen`                                      |  create a ssh key for setup VM's                      |
+|`ssh-keygen`                                      | create a ssh key for setup VM's                       |
 |`sudo cat .ssh/id_rsa.pub`                        |  to view the ssh public key                           |
 |`ssh azadmin@Jump-Box-Provisioner IP address`     |  to log into the Jump-Box-Provisioner                 |
 | `sudo docker container list -a`                  | list all docker containers                            |
