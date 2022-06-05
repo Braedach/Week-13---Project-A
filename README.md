@@ -70,11 +70,10 @@ A summary of the access policies in place can be found in the table below.
 | Web-2             | No                  |                      |
 | ELKserver         | Yes - Restricted IP | IAW NSG              |
 
-## Azure NSG
+## Azure Network Security Group
 
 Two Network Security Groups are employed to ensure that all traffic is vetted for security.
 Inbound rules added to the Azure Network Security Group as per table below, no changes were made to outbound rules.
-
  
 | Name              | Priority  |Name             |Port   |Protocol    |Source             |Destination          |Action    |
 | ELK-Server-NSG    | 3500      |ELK-Allow        |5601   |TCP         |Workstation IP     |VirtualNetwork       |Allow     |
@@ -85,7 +84,7 @@ Inbound rules added to the Azure Network Security Group as per table below, no c
 
 ------------------------------------------------------------------------------------------------------------------------------------------- 
   
-  ## Elk Configuration  
+## Elk Configuration  
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous.
 
