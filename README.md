@@ -210,7 +210,7 @@ In order to use the playbook, you will need to have an Ansible control node alre
 SSH into the control node and follow the steps below:
 
 - Copy the install-elk YAML file to the /etc/ansible directory
-- ![ELK Installation and VM Configuration ](https://github.com/Braedach/Week-13---Project-A/blob/main/Ansible/install-elk.yml)
+- [ELK Installation and VM Configuration ](https://github.com/Braedach/Week-13---Project-A/blob/main/Ansible/install-elk.yml)
 - Update the host file in the /etc/ansible directory to include the new elk server
 - Run the playbook
     - type the following command: 'ansible-playbook /etc/ansible/install-elk.yml'
